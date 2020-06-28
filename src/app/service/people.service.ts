@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { PersonResponse } from '../model/api-request';
+import { Observable, of } from 'rxjs';
+import { PeopleResponse } from '../model/api-request';
 import { CatList } from '../model/cat-list';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,17 @@ export class PeopleService {
   API_URL = 'http://agl-developer-test.azurewebsites.net/people.json';
   constructor(private readonly http: HttpClient) {}
 
-  getPeople(): Observable<PersonResponse> {
-    return this.http.get<PersonResponse>(this.API_URL);
+  getPeople(): Observable<PeopleResponse> {
+    return this.http.get<PeopleResponse>(this.API_URL).pipe(
+      catchError((error) => {
+        console.error('error fetching people.json');
+        console.error(error);
+        return of([]);
+      })
+    );
   }
 
-  transformResponse(response: PersonResponse): CatList {
+  transformResponse(response: PeopleResponse): CatList {
     const initialList = { male: [], female: [] };
     // check for null and undefined input
     if (response == null) {
