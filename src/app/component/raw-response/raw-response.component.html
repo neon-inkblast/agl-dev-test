@@ -1,1 +1,6 @@
-<p>raw-response works!</p>
+<div>
+  <div *ngIf="people$ | async as people; else loading">
+    <code>{{ people }}</code>
+  </div>
+</div>
+<ng-template #loading>Loading...</ng-template>
