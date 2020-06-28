@@ -9,11 +9,11 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class PeopleService {
-  API_URL = 'http://agl-developer-test.azurewebsites.net/people.json';
+  static API_URL = 'http://agl-developer-test.azurewebsites.net/people.json';
   constructor(private readonly http: HttpClient) {}
 
   getPeople(): Observable<PeopleResponse> {
-    return this.http.get<PeopleResponse>(this.API_URL).pipe(
+    return this.http.get<PeopleResponse>(PeopleService.API_URL).pipe(
       catchError((error) => {
         console.error('error fetching people.json');
         console.error(error);

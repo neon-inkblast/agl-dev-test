@@ -14,7 +14,6 @@ export class RawResponseComponent implements OnInit {
   constructor(private readonly peopleService: PeopleService) {}
 
   ngOnInit(): void {
-    console.log('init raw');
     this.people$ = this.peopleService.getPeople().pipe(map((response) => JSON.stringify(response, null, 2)));
   }
 }

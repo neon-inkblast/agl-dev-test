@@ -15,7 +15,6 @@ export class CatListContainerComponent implements OnInit {
   constructor(private readonly peopleService: PeopleService) {}
 
   ngOnInit(): void {
-    console.log('init cats');
     this.catList$ = this.peopleService
       .getPeople()
       .pipe(map((response) => this.peopleService.transformResponse(response)));

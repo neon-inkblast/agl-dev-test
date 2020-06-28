@@ -1,10 +1,9 @@
-import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import { PeopleService } from './people.service';
 
 describe('PeopleService', () => {
   let service: PeopleService;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -23,7 +22,7 @@ describe('PeopleService', () => {
       const response = PeopleResponseMock();
       service.getPeople().subscribe(subscriber);
 
-      const testRequest = httpMock.expectOne(service.API_URL);
+      const testRequest = httpMock.expectOne(PeopleService.API_URL);
       testRequest.flush(response);
 
       expect(testRequest.request.method).toBe('GET');
@@ -36,7 +35,7 @@ describe('PeopleService', () => {
       const response = PeopleResponseMock();
       service.getPeople().subscribe(subscriber);
 
-      const testRequest = httpMock.expectOne(service.API_URL);
+      const testRequest = httpMock.expectOne(PeopleService.API_URL);
       testRequest.flush(null, { status: 400, statusText: 'Bad Request' });
 
       expect(testRequest.request.method).toBe('GET');
