@@ -1,0 +1,13 @@
+<div>
+  <div *ngIf="catList$ | async as catList; else loading">
+    <div class="gender-block">
+      <div class="gender-title">male</div>
+      <agl-cat-list [cats]="catList.male"></agl-cat-list>
+    </div>
+    <div class="gender-block">
+      <div class="gender-title">female</div>
+      <agl-cat-list [cats]="catList.female"></agl-cat-list>
+    </div>
+  </div>
+</div>
+<ng-template #loading>Loading...</ng-template>

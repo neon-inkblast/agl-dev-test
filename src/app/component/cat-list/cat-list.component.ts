@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'agl-cat-list',
   templateUrl: './cat-list.component.html',
   styleUrls: ['./cat-list.component.scss'],
 })
-export class CatListComponent implements OnInit {
-  constructor() {}
+export class CatListComponent {
+  @Input()
+  cats: string[] = [];
 
-  ngOnInit(): void {}
+  constructor() {}
 }
