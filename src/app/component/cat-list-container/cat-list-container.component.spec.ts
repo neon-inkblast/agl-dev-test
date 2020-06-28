@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CatListContainerComponent } from './cat-list-container.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CatListContainerComponent', () => {
   let component: CatListContainerComponent;
@@ -9,6 +10,7 @@ describe('CatListContainerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CatListContainerComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   }));
 
