@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PeopleService } from './people.service';
 
-fdescribe('PeopleService', () => {
+describe('PeopleService', () => {
   let service: PeopleService;
 
   beforeEach(() => {
@@ -28,6 +28,19 @@ fdescribe('PeopleService', () => {
 
       expect(testRequest.request.method).toBe('GET');
       expect(subscriber.next).toHaveBeenCalledWith(response);
+    });
+
+    it('should handle errors and return an empty array', () => {
+      const httpMock = TestBed.inject(HttpTestingController);
+      const subscriber = jasmine.createSpyObj(['next']);
+      const response = PeopleResponseMock();
+      service.getPeople().subscribe(subscriber);
+
+      const testRequest = httpMock.expectOne(service.API_URL);
+      testRequest.flush(null, { status: 400, statusText: 'Bad Request' });
+
+      expect(testRequest.request.method).toBe('GET');
+      expect(subscriber.next).toHaveBeenCalledWith([]);
     });
   });
 
